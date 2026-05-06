@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b141a">
+    <title>Convite para Grupo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* Cor de fundo sólida e opaca para garantir visibilidade */
+            background-color: #0b141a; 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100vh;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Overlay do fundo - mais robusto */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Fundo preto sólido com opacidade controlada */
+            background: black;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        /* Modal Principal - Cores opacas e visíveis */
+        .invite-card {
+            /* Fundo escuro sólido */
+            background-color: #121b22; 
+            width: 100%;
+            max-width: 450px;
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            padding: 12px 24px 10px 24px;
+            box-sizing: border-box;
+            color: #e9edef;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+            /* Garante que o conteúdo não fique branco por herança */
+            color: #ffffff; 
+        }
+
+        /* Puller - Barrinha de topo */
+        .puller {
+            width: 40px;
+            height: 4px;
+            background-color: #3b4a54;
+            border-radius: 2px;
+            margin: 0 auto 15px auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            left: 20px;
+            top: 25px;
+            font-size: 24px;
+            color: #8696a0;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        /* Ícone do TikTok Evento */
+        .group-icon-container {
+            width: 105px;
+            height: 105px;
+            margin: 10px auto 15px auto;
+        }
+
+        .group-icon {
+            width: 100%;
+            height: 100%;
+            /* Imagem fixa e background de segurança */
+            background-color: #3b4a54;
+            background-image: url('https://p16-va.lemon8cdn.com/obj/tos-alisg-v-a3e477-sg/o0A6IeAnL9EIdlBfgeC8BI9E8e7DArCAfQAg7A'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            border: 2px solid #3b4a54;
+        }
+
+        .group-name {
+            font-size: 22px;
+            font-weight: 500;
+            margin: 0 0 5px 0;
+            color: #ffffff; /* Cor de texto explícita */
+        }
+
+        .creator-info {
+            font-size: 14px;
+            color: #8696a0;
+            margin-bottom: 20px;
+        }
+
+        /* Seção de Participantes */
+        .participants-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .avatar-stack {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 3px solid #121b22; 
+            margin-right: -12px; 
+            background-size: cover;
+            background-position: center;
+            background-color: #3b4a54; /* Background de segurança */
+        }
+
+        .more-count {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: #1f2c34;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            color: #e9edef; /* Cor de texto explícita */
+            border: 3px solid #121b22;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        /* Link e Botão */
+        .description-box {
+            font-size: 15px;
+            line-height: 1.4;
+            margin-bottom: 25px;
+            text-align: left;
+            color: #e9edef; /* Cor de texto explícita */
+        }
+        .link-text {
+            color: #53bdeb;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .read-more {
+            color: #00a884;
+            font-weight: bold;
+        }
+
+        /* Botão com efeito de App - Reforçado */
+        .join-btn {
+            display: block;
+            width: 100%;
+            background-color: #1fa855;
+            color: #0b141a; /* Texto escuro no botão claro */
+            text-decoration: none;
+            font-weight: 600;
+            padding: 14px 0;
+            border-radius: 25px;
+            font-size: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            /* Suaviza a animação */
+            transition: transform 0.1s ease, background-color 0.1s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Efeito de clique rápido (afundar) */
+        .join-btn:active {
+            transform: scale(0.96);
+            background-color: #1a8f48;
+        }
+
+        .home-indicator {
+            width: 130px;
+            height: 4px;
+            background-color: #3b4a54; /* Mais visível */
+            border-radius: 10px;
+            margin: 20px auto 5px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="invite-card">
+        <div class="puller"></div>
+        <span class="close-btn" onclick="alert('Fechar clicado')">&times;</span>
+        
+        <div class="group-icon-container">
+            <div class="group-icon"></div>
+        </div>
+
+        <h1 class="group-name">Ajuda dos 110 do tiktok ⚽💰</h1>
+        <div class="creator-info">Criado por Murilok, 03/05/2026</div>
+
+        <div class="participants-container">
+            <div class="avatar-stack">
+                <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=1');"></div>
+                <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=2');"></div>
+                <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=3');"></div>
+                <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?u=4');"></div>
+                <div class="more-count">+200</div>
+            </div>
+        </div>
+
+        <div class="description-box">
+            <span class="link-text">https://www.tiktok.com/d/4/ZS9F8qn4LQwsB-3ku1u/...</span>
+            <span class="read-more">Ler mais</span>
+        </div>
+
+        <button class="join-btn" onclick="redirecionarRapido()">
+            Entrar no grupo
+        </button>
+
+        <div class="home-indicator"></div>
+    </div>
+
+    <script>
+        // Função de clique rápido
+        function redirecionarRapido() {
+            // Força o redirecionamento imediato via JavaScript
+            window.location.href = "https://www.tiktok.com/d/4/ZS9FrJ8GaJnmp-UPHAw/";
+        }
+    </script>
+</body>
+</html>
